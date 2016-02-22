@@ -114,11 +114,11 @@ public class Retriever {
         break;
       }
       Query query = parser.parse(line);
-      System.out.print("Results for query " + query.toString(field));
+      System.out.print("<h1>Results for query <u>" + query.toString(field) +"</u>");
       if(queries != null) {
-    	  System.out.print(" in directoty " + queries);
+        System.out.print(" in directoty <u>" + queries +"</u>");
       }
-      System.out.println();
+      System.out.println("</h1>");
       if (repeat > 0) {                           // repeat & time as benchmark
         Date start = new Date();
         for (int i = 0; i < repeat; i++) {
@@ -152,11 +152,11 @@ public class Retriever {
  
     // Collect enough docs to show 10 pages
     TopDocs results = searcher.search(query, 10 * hitsPerPage);
-	  
+    
     ScoreDoc[] hits = results.scoreDocs;
     int numTotalHits = results.totalHits;
     //System.out.println("totalHit:" + numTotalHits);
-	
+  
     //System.out.println(numTotalHits + " total matching documents");
 
     int start = 0;
@@ -185,15 +185,15 @@ public class Retriever {
         Document doc = searcher.doc(hits[i].doc);
         String path = doc.get("path");
         if (path != null) {
-            System.out.print((i+1) + ". ");
+            System.out.print("<p><b><i> " + (i+1) + "</i>. ");
             String title = doc.get("title");
             if(title != null) {
-            	System.out.print(title);
+              System.out.print("</b><br><span style='margin-left:3em'>" + title + "</span></p>");
             }
             System.out.println();
             System.out.println(path);
           } else {
-            System.out.println((i+1) + ". " + "No path for this document");
+            System.out.println("<p><b><i> " + (i+1) + "</i>. " + "</b><br><span style='margin-left:3em'> No path for this document.</span></p>");
           }
                   
       }
